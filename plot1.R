@@ -21,9 +21,8 @@ if (file.exists(dataFileDir) == FALSE) {
 dtConsumption<-read.table(dataFileDir,header=TRUE,sep=";",dec=".",stringsAsFactors=FALSE,na.strings = "?")
 #Create subset of the data for specified date range
 dtSubSet<-dtConsumption[dtConsumption$Date %in% c("1/2/2007","2/2/2007") ,]
-#Create plot on screen
+#Create plot on device
+png(file="plot1.png")
 hist(dtSubSet$Global_active_power,col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
-#Copy the plot to png file
-dev.copy(png,file="plot1.png")
 #Close the device
 dev.off()
