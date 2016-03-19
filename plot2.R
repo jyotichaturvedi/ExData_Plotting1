@@ -23,9 +23,8 @@ dtConsumption<-read.table(dataFileDir,header=TRUE,sep=";",dec=".",stringsAsFacto
 dtSubSet<-dtConsumption[dtConsumption$Date %in% c("1/2/2007","2/2/2007") ,]
 #Combine date and time so variation can be plotted within a day
 datetime <- strptime(paste(dtSubSet$Date, dtSubSet$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
-#Create plot on screen
+#Create plot on device
+png(file="plot2.png")
 plot(datetime,dtSubSet$Global_active_power, ylab="Global Active Power (kilowatts)",xlab = "",type="l")
-#Copy the plot to png file
-dev.copy(png,file="plot2.png")
 #Close the device
 dev.off()

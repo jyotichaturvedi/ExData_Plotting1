@@ -23,9 +23,10 @@ dtConsumption<-read.table(dataFileDir,header=TRUE,sep=";",dec=".",stringsAsFacto
 dtSubSet<-dtConsumption[dtConsumption$Date %in% c("1/2/2007","2/2/2007") ,]
 ##Combine date and time so variation can be plotted within a day
 datetime <- strptime(paste(dtSubSet$Date, dtSubSet$Time, sep=" "), "%d/%m/%Y %H:%M:%S") 
+#Create plot on device
+png(file="plot4.png",width=480, height=480)
 #Create canvas of 4 by 4
 par(mfrow=c(2,2))
-#Create plot on screen
 plot(datetime,dtSubSet$Global_active_power, ylab="Global Active Power",xlab = "",type="l",cex=.2)
 plot(datetime,dtSubSet$Voltage, ylab="Volatage",xlab="datetime",type="l")
 plot(datetime,dtSubSet$Sub_metering_1,type="l", ylab = "Energy Sub metering", xlab = "")
@@ -33,7 +34,5 @@ lines(datetime,dtSubSet$Sub_metering_2,type="l", ylab = "Energy Submetering",col
 lines(datetime,dtSubSet$Sub_metering_3,type="l", ylab = "Energy Submetering",col="blue")
 legend("topright",legend=c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),col=c("black","red","blue"),lty=1,lwd=1,bty="n")
 plot(datetime,dtSubSet$Global_reactive_power, ylab="Global_Reactive_Power",xlab="datetime",type="l")
-#Copy the plot to png file
-dev.copy(png,file="plot4.png")
 #Close the device
 dev.off()
